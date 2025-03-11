@@ -436,6 +436,21 @@
             }
         }
         
+        // 处理导航点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('header a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView();
+                    }
+                });
+            });
+        });
+
         // 切换主题
         themeSwitch.addEventListener('click', function() {
             const currentTheme = document.documentElement.getAttribute('data-theme');

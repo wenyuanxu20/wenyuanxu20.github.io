@@ -23,10 +23,6 @@
   --education-bg: #ffffff;
   --skills-bg: #ffffff;
   --contact-bg: #ffffff;
-  
-  /* 添加滚动行为 */
-  scroll-behavior: smooth;
-  --scroll-speed: 300ms;
 }
 
 /* 暗色模式 */
@@ -43,6 +39,11 @@
   --contact-bg: #2a2a2a;
 }
 
+/* Global Styles */
+html {
+  scroll-behavior: auto;
+}
+
 /* 全局光标样式 */
 body {
   cursor: url('../assets/cursor-normal.png') 8 8, auto !important;
@@ -56,12 +57,6 @@ a, button, input[type="button"], input[type="submit"], .btn, .theme-switch {
 /* 移除之前的光标样式 */
 * {
   cursor: inherit;
-}
-
-/* Global Styles */
-html {
-  scroll-behavior: smooth;
-  scroll-duration: var(--scroll-speed);
 }
 
 body {

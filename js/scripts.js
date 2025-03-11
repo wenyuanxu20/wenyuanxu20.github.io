@@ -10,21 +10,19 @@
   // Remove no-js class
   $('html').removeClass('no-js')
 
-  // Animate to section when nav is clicked
+  // Direct jump to section when nav is clicked
   $('header a').click(function (e) {
     // Treat as normal link if no-scroll class
     if ($(this).hasClass('no-scroll')) return
 
     e.preventDefault()
     var heading = $(this).attr('href')
-    var scrollDistance = $(heading).offset().top
-
-    $('html, body').animate(
-      {
-        scrollTop: scrollDistance + 'px',
-      },
-      Math.abs(window.pageYOffset - $(heading).offset().top) / 1
-    )
+    if (heading.charAt(0) === '#') {
+      var targetElement = document.querySelector(heading)
+      if (targetElement) {
+        targetElement.scrollIntoView()
+      }
+    }
 
     // Hide the menu once clicked if mobile
     if ($('header').hasClass('active')) {
@@ -32,25 +30,17 @@
     }
   })
 
-  // Scroll to top
+  // Direct jump to top
   $('#to-top').click(function () {
-    $('html, body').animate(
-      {
-        scrollTop: 0,
-      },
-      500
-    )
+    window.scrollTo(0, 0)
   })
 
-  // Scroll to first element
+  // Direct jump to first element
   $('#lead-down span').click(function () {
-    var scrollDistance = $('#lead').next().offset().top
-    $('html, body').animate(
-      {
-        scrollTop: scrollDistance + 'px',
-      },
-      500
-    )
+    var targetElement = document.querySelector('#lead').nextElementSibling
+    if (targetElement) {
+      targetElement.scrollIntoView()
+    }
   })
 
   // Create timeline
