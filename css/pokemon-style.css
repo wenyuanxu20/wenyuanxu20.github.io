@@ -11,6 +11,32 @@
   --pokemon-light-blue: #3c5aa6;
   --pokemon-gold: #b69e31;
   --pixel-border: 4px solid var(--pokemon-black);
+  
+  /* 添加暗色模式变量 */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --box-bg: #ffffff;
+  --heading-color: #2a2a2a;
+  --border-color: #000000;
+}
+
+/* 暗色模式 */
+[data-theme="dark"] {
+  --bg-color: #2a2a2a;
+  --text-color: #ffffff;
+  --box-bg: #3a3a3a;
+  --heading-color: #ffffff;
+  --border-color: #ffffff;
+}
+
+/* 精灵球光标 */
+* {
+  cursor: url('https://raw.githubusercontent.com/wenyuanxu20/wenyuanxu20.github.io/main/assets/pokeball.png'), auto;
+}
+
+/* 可点击元素的光标 */
+a, button, input[type="button"], input[type="submit"], .btn, .theme-switch {
+  cursor: url('https://raw.githubusercontent.com/wenyuanxu20/wenyuanxu20.github.io/main/assets/masterball.png'), pointer;
 }
 
 /* Global Styles */
@@ -18,21 +44,24 @@ body {
   font-family: 'Press Start 2P', cursive;
   font-size: 14px;
   line-height: 1.6;
-  background-color: #f8f8f8;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVDiNY2AYBYMRMDIyMjDCGExMTHySEhL/maAC//79Y/j3/z8jIyMjA8P//wwM//8zMDIwMDDAvP/v3z8GJkZGRgaGf/8ZmJFNhAOo4MzMzAx//v5lYGZiYmL4/+8fI+OoJ0YBBQAAruAkxOVMKL0AAAAASUVORK5CYII=');
   background-repeat: repeat;
-  color: var(--pokemon-black);
   image-rendering: pixelated;
+  cursor: url('../assets/pokeball.png'), auto;
 }
 
 /* Pixel Border Box */
 .pixel-box {
-  border: var(--pixel-border);
-  background-color: var(--pokemon-white);
+  border: 4px solid var(--border-color);
+  background-color: var(--box-bg);
   padding: 15px;
   position: relative;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
+  color: var(--text-color);
 }
 
 .pixel-box:before {
@@ -42,7 +71,7 @@ body {
   left: -4px;
   right: -4px;
   bottom: -4px;
-  border: 2px solid var(--pokemon-black);
+  border: 2px solid var(--border-color);
   z-index: -1;
 }
 
@@ -108,8 +137,8 @@ header a:hover {
 
 #lead-content h1 {
   font-size: 2.5em;
-  color: var(--pokemon-red);
-  text-shadow: 2px 2px 0 var(--pokemon-black);
+  color: var(--heading-color) !important;
+  text-shadow: 2px 2px 0 var(--border-color) !important;
   margin-bottom: 15px;
 }
 
@@ -132,10 +161,10 @@ header a:hover {
 .heading {
   position: relative;
   display: inline-block;
-  color: var(--pokemon-red);
+  color: var(--heading-color) !important;
   font-size: 2em;
   margin: 0 0 30px 0;
-  text-shadow: 2px 2px 0 var(--pokemon-black);
+  text-shadow: 2px 2px 0 var(--border-color) !important;
 }
 
 .heading:after {
@@ -244,8 +273,8 @@ header a:hover {
   margin-bottom: 15px;
   border: var(--pixel-border);
   padding: 10px;
-  background-color: var(--pokemon-light-blue);
-  color: var(--pokemon-white);
+  background-color: var(--box-bg);
+  color: var(--text-color);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -255,8 +284,8 @@ header a:hover {
 
 /* Footer */
 footer {
-  background-color: var(--pokemon-red);
-  color: var(--pokemon-white);
+  background-color: var(--box-bg);
+  color: var(--text-color);
   padding: 20px 0;
   border-top: var(--pixel-border);
 }
@@ -320,4 +349,29 @@ footer {
   .heading {
     font-size: 1.5em;
   }
+}
+
+/* 主题切换按钮 */
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: none;
+  border: var(--pixel-border);
+  padding: 10px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: var(--text-color);
+  background-color: var(--box-bg);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.theme-switch:hover {
+  transform: scale(1.1);
+}
+
+a:hover, button:hover {
+  cursor: url('../assets/masterball.png'), pointer;
 } 
