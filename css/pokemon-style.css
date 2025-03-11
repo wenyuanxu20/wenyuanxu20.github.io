@@ -10,7 +10,7 @@
   --pokemon-gray: #808080;
   --pokemon-light-blue: #3c5aa6;
   --pokemon-gold: #b69e31;
-  --pixel-border: 4px solid var(--pokemon-black);
+  --pixel-border: 4px solid var(--border-color);
   
   /* 添加暗色模式变量 */
   --bg-color: #ffffff;
@@ -18,6 +18,15 @@
   --box-bg: #ffffff;
   --heading-color: #2a2a2a;
   --border-color: #000000;
+  --section-bg: #ffffff;
+  --timeline-bg: #ffffff;
+  --education-bg: #ffffff;
+  --skills-bg: #ffffff;
+  --contact-bg: #ffffff;
+  
+  /* 添加滚动行为 */
+  scroll-behavior: smooth;
+  --scroll-speed: 300ms;
 }
 
 /* 暗色模式 */
@@ -27,19 +36,34 @@
   --box-bg: #3a3a3a;
   --heading-color: #ffffff;
   --border-color: #ffffff;
+  --section-bg: #2a2a2a;
+  --timeline-bg: #3a3a3a;
+  --education-bg: #3a3a3a;
+  --skills-bg: #2a2a2a;
+  --contact-bg: #2a2a2a;
 }
 
-/* 精灵球光标 */
-* {
-  cursor: url('https://raw.githubusercontent.com/wenyuanxu20/wenyuanxu20.github.io/main/assets/pokeball.png'), auto;
+/* 全局光标样式 */
+body {
+  cursor: url('../assets/cursor-normal.png') 8 8, auto !important;
 }
 
 /* 可点击元素的光标 */
 a, button, input[type="button"], input[type="submit"], .btn, .theme-switch {
-  cursor: url('https://raw.githubusercontent.com/wenyuanxu20/wenyuanxu20.github.io/main/assets/masterball.png'), pointer;
+  cursor: url('../assets/cursor-pointer.png') 8 8, pointer !important;
+}
+
+/* 移除之前的光标样式 */
+* {
+  cursor: inherit;
 }
 
 /* Global Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-duration: var(--scroll-speed);
+}
+
 body {
   font-family: 'Press Start 2P', cursive;
   font-size: 14px;
@@ -50,7 +74,6 @@ body {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVDiNY2AYBYMRMDIyMjDCGExMTHySEhL/maAC//79Y/j3/z8jIyMjA8P//wwM//8zMDIwMDDAvP/v3z8GJkZGRgaGf/8ZmJFNhAOo4MzMzAx//v5lYGZiYmL4/+8fI+OoJ0YBBQAAruAkxOVMKL0AAAAASUVORK5CYII=');
   background-repeat: repeat;
   image-rendering: pixelated;
-  cursor: url('../assets/pokeball.png'), auto;
 }
 
 /* Pixel Border Box */
@@ -83,7 +106,7 @@ header {
 }
 
 header ul {
-  background-color: var(--pokemon-white) !important;
+  background-color: var(--box-bg) !important;
   border: var(--pixel-border);
   border-radius: 0 !important;
   padding: 10px !important;
@@ -94,7 +117,7 @@ header li {
 }
 
 header a {
-  color: var(--pokemon-black) !important;
+  color: var(--text-color) !important;
   text-decoration: none;
   padding: 8px !important;
   transition: all 0.2s ease;
@@ -109,9 +132,10 @@ header a:hover {
 
 /* Lead Section */
 #lead {
-  background: url('../assets/lead-bg.jpg') !important;
-  background-size: cover !important;
-  background-position: center !important;
+  background-color: var(--section-bg) !important;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVDiNY2AYBYMRMDIyMjDCGExMTHySEhL/maAC//79Y/j3/z8jIyMjA8P//wwM//8zMDIwMDDAvP/v3z8GJkZGRgaGf/8ZmJFNhAOo4MzMzAx//v5lYGZiYmL4/+8fI+OoJ0YBBQAAruAkxOVMKL0AAAAASUVORK5CYII=') !important;
+  background-repeat: repeat !important;
+  background-size: 16px 16px !important;
   position: relative;
   height: 100vh;
   min-height: 500px;
@@ -128,7 +152,7 @@ header a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--box-bg);
   border: var(--pixel-border);
   padding: 20px;
   width: 80%;
@@ -144,12 +168,59 @@ header a:hover {
 
 #lead-content h2 {
   font-size: 1.5em;
-  color: var(--pokemon-blue);
+  color: var(--text-color);
   margin-bottom: 15px;
 }
 
 #lead-overlay {
   background: rgba(33, 125, 187, 0.2);
+}
+
+#lead-down {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  bottom: 15px;
+  color: var(--text-color);
+}
+
+#lead-down span {
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  width: 35px;
+  height: 35px;
+  border: var(--pixel-border);
+  background: var(--box-bg);
+  border-radius: 0;
+  text-align: center;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] #lead-down span {
+  box-shadow: 3px 3px 0 rgba(255, 255, 255, 0.2);
+}
+
+#lead-down i {
+  animation: pulsate 1.5s ease;
+  animation-iteration-count: infinite;
+  padding-top: 5px;
+  color: var(--text-color);
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
 
 /* Sections */
@@ -192,13 +263,17 @@ header a:hover {
 }
 
 /* Experience Timeline */
+#experience {
+  background-color: var(--section-bg);
+}
+
 #experience-timeline {
   position: relative;
 }
 
 .vtimeline-content {
   border: var(--pixel-border);
-  background: var(--pokemon-white);
+  background: var(--timeline-bg);
   padding: 15px;
   border-radius: 0;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
@@ -215,31 +290,44 @@ header a:hover {
 }
 
 .vtimeline-date {
-  color: var(--pokemon-blue);
+  color: var(--text-color);
   font-weight: bold;
+}
+
+/* 确保experience部分的所有文字颜色正确 */
+#experience h3, 
+#experience h4, 
+#experience p,
+#experience a {
+  color: var(--text-color);
+}
+
+/* 修改experience部分的链接样式 */
+#experience a:hover {
+  color: var(--pokemon-yellow);
 }
 
 /* Education Blocks */
 .education-block {
   border: var(--pixel-border);
-  background: var(--pokemon-white);
+  background: var(--education-bg);
   padding: 15px;
   margin-bottom: 20px;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
 .education-block h3 {
-  color: var(--pokemon-red);
+  color: var(--text-color);
   font-weight: bold;
 }
 
 .education-block h4 {
-  color: var(--pokemon-blue);
+  color: var(--text-color);
 }
 
 /* Skills */
 #skills {
-  background-color: var(--pokemon-white);
+  background-color: var(--skills-bg);
 }
 
 #skills ul {
@@ -266,7 +354,7 @@ header a:hover {
 
 /* Contact */
 #contact {
-  background-color: var(--pokemon-white);
+  background-color: var(--contact-bg);
 }
 
 #contact-form article {
@@ -302,10 +390,10 @@ footer {
 
 .social a {
   display: block;
-  color: var(--pokemon-white);
+  color: var(--text-color);
   padding: 10px;
   font-size: 20px;
-  background: var(--pokemon-blue);
+  background: var(--box-bg);
   border: var(--pixel-border);
   transition: all 0.3s ease;
 }
@@ -372,6 +460,29 @@ footer {
   transform: scale(1.1);
 }
 
-a:hover, button:hover {
-  cursor: url('../assets/masterball.png'), pointer;
+/* 确保所有可点击元素都使用pointer光标 */
+a:hover, 
+button:hover, 
+input[type="button"]:hover, 
+input[type="submit"]:hover, 
+.btn:hover, 
+.theme-switch:hover,
+.social a:hover,
+#skills li:hover,
+header a:hover {
+  cursor: url('../assets/cursor-pointer.png') 8 8, pointer !important;
+}
+
+/* 修改背景和文字颜色的过渡效果 */
+body, .pixel-box, .education-block, .vtimeline-content, #skills, #contact, #contact-form article {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 调整深色模式下的阴影效果 */
+[data-theme="dark"] .pixel-box,
+[data-theme="dark"] .education-block,
+[data-theme="dark"] .vtimeline-content,
+[data-theme="dark"] #contact-form article,
+[data-theme="dark"] .theme-switch {
+  box-shadow: 5px 5px 0 rgba(255, 255, 255, 0.2);
 } 
