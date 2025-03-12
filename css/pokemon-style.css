@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
+  /* 默认亮色主题 */
   --pokemon-red: #ff0000;
-  --pokemon-blue: #0000ff;
+  --pokemon-blue: #3c5aa6;
   --pokemon-yellow: #ffde00;
   --pokemon-black: #000000;
   --pokemon-white: #ffffff;
@@ -12,31 +13,60 @@
   --pokemon-gold: #b69e31;
   --pixel-border: 4px solid var(--border-color);
   
-  /* 添加暗色模式变量 */
-  --bg-color: #ffffff;
-  --text-color: #000000;
+  /* 亮色主题变量 */
+  --bg-color: #f5f5f7;
+  --text-color: #2a2a2a;
   --box-bg: #ffffff;
-  --heading-color: #2a2a2a;
-  --border-color: #000000;
+  --heading-color: #1a1a1a;
+  --border-color: #2a2a2a;
   --section-bg: #ffffff;
+  --alt-section-bg: #f0f2f5;
   --timeline-bg: #ffffff;
   --education-bg: #ffffff;
   --skills-bg: #ffffff;
   --contact-bg: #ffffff;
+  --accent-color: #3c5aa6;
+  --button-bg: #4a90e2;
+  --button-text: #ffffff;
+  --box-shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* 暗色模式 */
+/* 暗色主题 */
 [data-theme="dark"] {
-  --bg-color: #2a2a2a;
-  --text-color: #ffffff;
-  --box-bg: #3a3a3a;
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --box-bg: #2a2a2a;
   --heading-color: #ffffff;
-  --border-color: #ffffff;
+  --border-color: #4a4a4a;
   --section-bg: #2a2a2a;
-  --timeline-bg: #3a3a3a;
-  --education-bg: #3a3a3a;
+  --alt-section-bg: #1f1f1f;
+  --timeline-bg: #2a2a2a;
+  --education-bg: #2a2a2a;
   --skills-bg: #2a2a2a;
   --contact-bg: #2a2a2a;
+  --accent-color: #7289da;
+  --button-bg: #7289da;
+  --button-text: #ffffff;
+  --box-shadow: rgba(255, 255, 255, 0.1);
+}
+
+/* 赛博朋克主题 */
+[data-theme="cyberpunk"] {
+  --bg-color: #0a0a2c;
+  --text-color: #00ff9f;
+  --box-bg: #1a1a4a;
+  --heading-color: #ff2a6d;
+  --border-color: #05d9e8;
+  --section-bg: #1a1a4a;
+  --alt-section-bg: #151540;
+  --timeline-bg: #1a1a4a;
+  --education-bg: #1a1a4a;
+  --skills-bg: #1a1a4a;
+  --contact-bg: #1a1a4a;
+  --accent-color: #ff2a6d;
+  --button-bg: #ff2a6d;
+  --button-text: #ffffff;
+  --box-shadow: rgba(5, 217, 232, 0.2);
 }
 
 /* Global Styles */
@@ -45,18 +75,22 @@ html {
 }
 
 /* 全局光标样式 */
-body {
-  cursor: url('../assets/cursor-normal.png') 8 8, auto !important;
+* {
+  cursor: url('../assets/cursor-normal.png'), auto;
 }
 
 /* 可点击元素的光标 */
-a, button, input[type="button"], input[type="submit"], .btn, .theme-switch {
-  cursor: url('../assets/cursor-pointer.png') 8 8, pointer !important;
-}
-
-/* 移除之前的光标样式 */
-* {
-  cursor: inherit;
+a,
+button,
+input[type="button"],
+input[type="submit"],
+.btn,
+.theme-switch,
+#mobile-menu-open,
+#mobile-menu-close,
+#lead-down span,
+#to-top {
+  cursor: url('../assets/cursor-pointer.png'), pointer !important;
 }
 
 body {
@@ -77,7 +111,7 @@ body {
   background-color: var(--box-bg);
   padding: 15px;
   position: relative;
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
   margin-bottom: 20px;
   color: var(--text-color);
 }
@@ -219,7 +253,32 @@ header a:hover {
 }
 
 /* Sections */
-#about, #experience, #education, #skills, #contact {
+#about {
+  background-color: var(--section-bg);
+  padding: 50px 15px;
+  border-bottom: var(--pixel-border);
+}
+
+#experience {
+  background-color: var(--alt-section-bg);
+  padding: 50px 15px;
+  border-bottom: var(--pixel-border);
+}
+
+#education {
+  background-color: var(--section-bg);
+  padding: 50px 15px;
+  border-bottom: var(--pixel-border);
+}
+
+#skills {
+  background-color: var(--alt-section-bg);
+  padding: 50px 15px;
+  border-bottom: var(--pixel-border);
+}
+
+#contact {
+  background-color: var(--section-bg);
   padding: 50px 15px;
   border-bottom: var(--pixel-border);
 }
@@ -258,10 +317,6 @@ header a:hover {
 }
 
 /* Experience Timeline */
-#experience {
-  background-color: var(--section-bg);
-}
-
 #experience-timeline {
   position: relative;
 }
@@ -271,7 +326,7 @@ header a:hover {
   background: var(--timeline-bg);
   padding: 15px;
   border-radius: 0;
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
 }
 
 .vtimeline-icon {
@@ -308,7 +363,7 @@ header a:hover {
   background: var(--education-bg);
   padding: 15px;
   margin-bottom: 20px;
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
 }
 
 .education-block h3 {
@@ -321,10 +376,6 @@ header a:hover {
 }
 
 /* Skills */
-#skills {
-  background-color: var(--skills-bg);
-}
-
 #skills ul {
   display: flex;
   flex-wrap: wrap;
@@ -338,7 +389,7 @@ header a:hover {
   color: var(--pokemon-white);
   background: var(--pokemon-blue);
   border: var(--pixel-border);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 0 var(--box-shadow);
   transition: all 0.3s ease;
 }
 
@@ -348,17 +399,13 @@ header a:hover {
 }
 
 /* Contact */
-#contact {
-  background-color: var(--contact-bg);
-}
-
 #contact-form article {
   margin-bottom: 15px;
   border: var(--pixel-border);
   padding: 10px;
   background-color: var(--box-bg);
   color: var(--text-color);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
 }
 
 #contact-form article i {
@@ -402,7 +449,7 @@ footer {
 /* Portrait */
 .portrait {
   border: var(--pixel-border);
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
   image-rendering: pixelated;
 }
 
@@ -434,12 +481,17 @@ footer {
   }
 }
 
-/* 主题切换按钮 */
-.theme-switch {
+/* 主题切换按钮组 */
+.theme-buttons {
   position: fixed;
   top: 20px;
-  right: 20px;
+  left: 20px;
   z-index: 1000;
+  display: flex;
+  gap: 10px;
+}
+
+.theme-button {
   background: none;
   border: var(--pixel-border);
   padding: 10px;
@@ -447,29 +499,57 @@ footer {
   font-size: 12px;
   color: var(--text-color);
   background-color: var(--box-bg);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 0 var(--box-shadow);
   transition: all 0.3s ease;
 }
 
-.theme-switch:hover {
+.theme-button:hover {
   transform: scale(1.1);
 }
 
-/* 确保所有可点击元素都使用pointer光标 */
-a:hover, 
-button:hover, 
-input[type="button"]:hover, 
-input[type="submit"]:hover, 
-.btn:hover, 
-.theme-switch:hover,
-.social a:hover,
-#skills li:hover,
-header a:hover {
-  cursor: url('../assets/cursor-pointer.png') 8 8, pointer !important;
+/* 赛博朋克特效 */
+[data-theme="cyberpunk"] .heading {
+  text-shadow: 0 0 10px var(--heading-color),
+               0 0 20px var(--heading-color),
+               0 0 30px var(--heading-color);
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+[data-theme="cyberpunk"] .pixel-box {
+  border-color: var(--border-color);
+  box-shadow: 0 0 15px var(--border-color);
+}
+
+[data-theme="cyberpunk"] #skills li {
+  background: linear-gradient(45deg, var(--accent-color), var(--button-bg));
+  border-color: var(--border-color);
+  box-shadow: 0 0 10px var(--border-color);
+}
+
+@keyframes neon {
+  from {
+    text-shadow: 0 0 10px var(--heading-color),
+                 0 0 20px var(--heading-color),
+                 0 0 30px var(--heading-color);
+  }
+  to {
+    text-shadow: 0 0 5px var(--heading-color),
+                 0 0 10px var(--heading-color),
+                 0 0 15px var(--heading-color);
+  }
 }
 
 /* 修改背景和文字颜色的过渡效果 */
-body, .pixel-box, .education-block, .vtimeline-content, #skills, #contact, #contact-form article {
+body, 
+.pixel-box, 
+.education-block, 
+.vtimeline-content, 
+#skills, 
+#contact, 
+#contact-form article,
+#about,
+#experience,
+#education {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -479,5 +559,5 @@ body, .pixel-box, .education-block, .vtimeline-content, #skills, #contact, #cont
 [data-theme="dark"] .vtimeline-content,
 [data-theme="dark"] #contact-form article,
 [data-theme="dark"] .theme-switch {
-  box-shadow: 5px 5px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 5px 0 var(--box-shadow);
 } 

@@ -18,9 +18,17 @@
 </head>
 
 <body>
-    <button class="theme-switch" id="theme-switch">
-        <i class="fa fa-moon-o"></i> 
-    </button>
+    <div class="theme-buttons">
+        <button class="theme-button" id="theme-light">
+            <i class="fa fa-sun-o"></i> 
+        </button>
+        <button class="theme-button" id="theme-dark">
+            <i class="fa fa-moon-o"></i> 
+        </button>
+        <button class="theme-button" id="theme-cyberpunk">
+            <i class="fa fa-bolt"></i> 
+        </button>
+    </div>
     <div id="mobile-menu-open" class="shadow-large">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
@@ -376,6 +384,10 @@
                     <p>
                         Copyright &copy; <span id="current-year">2022</span> wenyuanxu20
                     </p>
+                    <!-- 添加访问统计 -->
+                    <div id="visit-counter">
+                        <span id="visits">0</span> visitors
+                    </div>
                 </div>
                 <div class="col-sm-2 top">
                     <span id="to-top">
@@ -423,53 +435,34 @@
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
         // 主题切换功能
-        const themeSwitch = document.getElementById('theme-switch');
-        const icon = themeSwitch.querySelector('i');
+        const themeLightBtn = document.getElementById('theme-light');
+        const themeDarkBtn = document.getElementById('theme-dark');
+        const themeCyberpunkBtn = document.getElementById('theme-cyberpunk');
         
         // 检查本地存储中的主题设置
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                icon.classList.remove('fa-moon-o');
-                icon.classList.add('fa-sun-o');
-            }
-        }
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
         
-        // 处理导航点击事件
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('header a[href^="#"]');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView();
-                    }
-                });
-            });
+        // 切换到亮色主题
+        themeLightBtn.addEventListener('click', function() {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
         });
-
-        // 切换主题
-        themeSwitch.addEventListener('click', function() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                icon.classList.remove('fa-sun-o');
-                icon.classList.add('fa-moon-o');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                icon.classList.remove('fa-moon-o');
-                icon.classList.add('fa-sun-o');
-            }
+        
+        // 切换到暗色主题
+        themeDarkBtn.addEventListener('click', function() {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        });
+        
+        // 切换到赛博朋克主题
+        themeCyberpunkBtn.addEventListener('click', function() {
+            document.documentElement.setAttribute('data-theme', 'cyberpunk');
+            localStorage.setItem('theme', 'cyberpunk');
         });
         
         // 添加宝可梦像素风格的动画效果
         document.addEventListener('DOMContentLoaded', function() {
-            // 添加像素风格的动画效果
             const skillItems = document.querySelectorAll('#skills li');
             skillItems.forEach(item => {
                 item.addEventListener('mouseover', function() {
@@ -483,6 +476,19 @@
         });
     </script>
 
+// 在脚本部分添加统计功能
+<script>
+    // 访问统计功能
+    const counter = document.getElementById('visits');
+    const namespace = 'wenyuanxu20.github.io';
+    
+    // 获取并更新访问次数
+    fetch(`https://api.countapi.xyz/hit/${namespace}/visits`)
+        .then(res => res.json())
+        .then(res => {
+            counter.textContent = res.value.toLocaleString();
+        });
+</script>
 </body>
 
 </html>
